@@ -1,4 +1,32 @@
 Rails.application.routes.draw do
+  get 'tweet/new'
+
+  get 'tweet/create'
+
+  get 'tweet/update'
+
+  get 'tweet/edit'
+
+  get 'tweet/destroy'
+
+  get 'tweet/show'
+
+  get 'tweet/index'
+
+  get 'users/new'
+
+  get 'users/create'
+
+  get 'users/update'
+
+  get 'users/edit'
+
+  get 'users/destroy'
+
+  get 'users/show'
+
+  get 'users/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
