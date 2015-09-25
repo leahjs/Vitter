@@ -1,0 +1,9 @@
+<h1>Tweet#new</h1>
+<p>Find me in app/views/tweet/new.html.erb</p>
+
+
+<%= form_for @tweet do |f| %>
+<%= f.label :content %>
+<%= f.text_field :content %>
+<%= f.submit %>
+<% end %>

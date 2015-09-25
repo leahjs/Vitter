@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post "headshot/capture" => 'headshot#capture', :as => :headshot_capture
+  root to: 'tweets#index'
+
+  resources :tweets
   get 'tweet/new'
 
   get 'tweet/create'
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'tweet/show'
 
-  get 'tweet/index'
+
 
   get 'users/new'
 

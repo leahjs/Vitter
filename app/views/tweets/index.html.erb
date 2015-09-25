@@ -1,0 +1,8 @@
+<h1>Tweet#index</h1>
+<p>Find me in app/views/tweet/index.html.erb</p>
+
+<h4>All the tweets</h4>
+
+<% Tweet.all.each do |tweet| %>
+<%= tweet.content %>
+<% end %>
