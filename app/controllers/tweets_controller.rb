@@ -1,5 +1,7 @@
 require 'carrierwave/orm/activerecord'
 class TweetsController < ApplicationController
+	helper :headshot
+
 
   def index
     # @tweet = Tweet.all
@@ -11,12 +13,21 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = Tweet.new(tweet_params)
-    uploader = AvatarUploader.new
-    uploader.store!(my_file)
+    # upload
     @tweet.save
+		redirect_to tweets_path
+    # uploader = AvatarUploader.new
+    # uploader.store!(my_file)
   end
 
-  def sho
+  def upload
+    uploaded_io = params[:tweet][:media]
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+  end
+
+  def show
   end
 
   def update
@@ -35,7 +46,7 @@ class TweetsController < ApplicationController
     # end
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, :media)
   end
 
 end

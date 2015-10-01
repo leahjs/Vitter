@@ -1,8 +1,10 @@
-<h1>Tweet#index</h1>
-<p>Find me in app/views/tweet/index.html.erb</p>
-
 <h4>All the tweets</h4>
 
 <% Tweet.all.each do |tweet| %>
-<%= tweet.content %>
+	<ul>
+		<li style="list-style-type: none;"><%= tweet.content %></li>
+		<!-- <li><%= tweet.media %></li> -->
+	</ul>
 <% end %>
+
+<%= link_to 'Make a new tweet', new_tweet_path %>

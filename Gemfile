@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'carrierwave'
 gem 'headshot'
+gem 'omniauth-twitter'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

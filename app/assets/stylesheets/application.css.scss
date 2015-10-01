@@ -21,10 +21,68 @@
 @import "bootstrap";
 /* Some Style from the Bootstrap Default Theme */
 body {
-  padding-top: 70px;
-  padding-bottom: 30px;
+  padding-top: 17px;
+  // padding-bottom: 30px;
+}
+.form-group {
+  margin-top: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+// body {
+//   margin: 0px;
+//   padding: 0px;
+// }
+// #my_camera > video {
+//   width:150px;
+//   height:100px;
+//   border-radius: 7px;
+// }
+
+video {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 4px 4px;
+  overflow: hidden;
+  width: 40px;
 }
 
+// .grayscale {
+//   +filter: grayscale(1);
+// }
+// .sepia {
+//   +filter: sepia(1);
+// }
+// .blur {
+//   +filter: blur(3px);
+// }
+
+
+.play {
+  margin-right: 0;
+    margin-left: 0;
+    background-color: #E8E8E8;
+    // border-color: #ccc;
+    // border-width: 10px;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+.play > p {
+ padding-left: 10px;
+}
+img {
+    border-radius: 4px 4px 4px 4px;
+    margin: 10px;
+
+}
+#player {
+  width: 150px;
+  height: 100px;
+}
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
