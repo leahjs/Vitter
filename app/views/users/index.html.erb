@@ -1,2 +1,77 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<% if current_user %>
+
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+            <h3 class="masthead-brand">Vitter</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+                <!-- <li class="active"><a href="#">Home</a></li> -->
+                <li>
+                  You are signed in <%= current_user.name %>
+                <%= link_to 'Signout', '/signout' %></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="inner cover">
+          <h1 class="cover-heading">Finally Tweet your Snapshots!</h1>
+          <p class="lead">Sometimes you want to send how you feel in the moment especially when you are at an event or watching a tv show.</p>
+          <p class="lead">
+            <%= link_to 'Tweet Now', 'tweets/new', :class => "btn btn-lg btn-default"%>
+          </p>
+        </div>
+
+        <div class="mastfoot">
+          <div class="inner">
+            <p>Made by <a href="http://github.com/leahjs">Leah Suter</a>, by <a href="https://twitter.com/leahjs">@leahjs</a>.</p>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+<% else %>
+
+
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+            <h3 class="masthead-brand">Vitter</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+                <!-- <li class="active"><a href="#">Home</a></li> -->
+                <li><a href="#">Features</a></li>
+                <li><%= link_to 'Login', '/auth/twitter' %></li>
+                <!-- <li><a href="#">Contact</a></li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="inner cover">
+          <h1 class="cover-heading">Finally Tweet your Snapshots!</h1>
+          <p class="lead">Sometimes you want to send how you feel in the moment especially when you are at an event or watching a tv show.</p>
+          <p class="lead">
+            <%= link_to 'Tweet Now', '/auth/twitter', :class => "btn btn-lg btn-default" %>
+          </p>
+        </div>
+
+        <div class="mastfoot">
+          <div class="inner">
+            <p>Made by <a href="http://github.com/leahjs">Leah Suter</a>, by <a href="https://twitter.com/leahjs">@leahjs</a>.</p>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<% end %>
