@@ -1,9 +1,10 @@
 require 'carrierwave/orm/activerecord'
+require 'base64'
 class TweetsController < ApplicationController
-	helper :headshot
 
 
   def index
+		@tweet = Tweet.where(:user_id => session[:user_id])
   end
 
   def new
@@ -11,26 +12,15 @@ class TweetsController < ApplicationController
   end
 
   def create
-		# binding.pry
-		 Tweet.new(:content => params[:tweet][:content], :media => params[:media])
+		@tweet = Tweet.new(:content => params[:tweet][:content], :media => params[:media], :user_id => session[:user_id])
+		tmp_file = Base64.decode64(params[:media])
+		file = File.open('tmp/user_media_pic.jpeg', 'wb')
+		file.puts(tmp_file)
+		@tweet.avatar = file
     @tweet.save
-		tweet_id = @tweet.id
-		# $twitter_client = Twitter::Client.new
-		# $twitter_client.update(:content => params[:tweet][:content])
-		picture = params[:media]
-		@file = File.open('new_picture.png', 'w') {|f| f.write(Base64.decode64(picture))}
-		@file_name = File.basename("new_picture.png")
-    aws_upload
-		binding.pry
-		@upload.save
-			if @upload.save
-			  flash.now[:notice] = 'picture successfully uploaded'
-			else
-			  flash.now[:notice] = 'There was an error'
-			end
-		redirect_to tweets_path
-    # uploader = AvatarUploader.new
-    # uploader.store!(my_file)
+		@tweet.client.update_with_media(params[:tweet][:content], File.new('tmp/user_media_pic.jpeg'))
+		file.close
+		redirect_to '/tweets'
   end
 
 	def aws_upload

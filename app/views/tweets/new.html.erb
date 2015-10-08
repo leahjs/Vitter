@@ -1,71 +1,62 @@
-<div class="container-fluid">
-	<div class="row">
+<!-- <div class="container-fluid"> -->
+	<!-- <div class="row"> -->
+<!-- /Menu-->
+  <div id="header-nav">
+    <div class="container">
+  <!-- H1 for SEO -->
+    <div class="brand">
+      <a href="/"><h1>Vitter</h1></a>
+    </div>
+    <!-- Small screen menu button -->
+		<a href="#menu" class="menu-link">
+      <span class="bar1"></span>
+      <span class="bar2"></span>
+      <span class="bar3"></span>
+     </a>
+    <!-- /Small screen menu button -->
+
+    <!-- Menu Items -->
+    <nav id="menu" role="navigation">
+			<ul>
+				<li><a href="#">Create a new tweet</a></li>
+				<li><%= link_to 'Profile', tweets_path %></li>
+					<li><%= link_to 'Signout', '/signout' %></li>
+			</ul>
+		</nav>
+    <!-- /Menu Items -->
+      </div>
+	</div>
+<!-- /Menu -->
+
 		<div class="col-md-12">
 
-			<nav class="navbar navbar-default black-nav" role="navigation">
-
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button> <a class="navbar-brand" href="#">Vitter</a>
-				</div>
-
-				<div class="collapse navbar-collapse black-nav" id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav black-nav">
-						<!-- <li class="active">
-
-						</li> -->
-
-							<li>
-							<a href="#">Create a new tweet</a></li>
-
-						<li><%= link_to 'All Tweets', tweets_path %></li>
-					</ul>
-
-				</div>
-
-			</nav>
-
-			<h3 class="headline">Tweet Something New <%= current_user.name %></h3>
-			<div id="my_camera" style="width:150px; height:100px; border-radius: 7px;"></div><br>
-			<a href="javascript:void(take_snapshot())" class="btn btn-default snap">Take Snapshot</a>
-			<!-- <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-rounded"> -->
+			<h5 class="headline">Step: 1 <%= current_user.name %> pose in your best outfit and click 'Take Snapshot'</h5>
+				<a href="javascript:void(take_snapshot())" class="btn btn-default snap">Take Snapshot</a>
+					<h5 class="headline">Step: 2 Write how you feel in the tweet box.</h5>
 			<div class="row">
+
 				<div class="col-md-4">
+					<div id="my_camera" style="width:450px; height:300px; border-radius: 7px; -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+						-webkit-transform: rotate(0.000001deg);"></div><br>
 					<%= form_for @tweet do |f| %>
-					<!-- <form role="form" pb-autologin="true" autocomplete="off"> -->
-
-<div class="play" >
-
+					<div class="play" >
 						<div class="form-group" style="border-color:blue;">
-							<!-- <label for="exampleInputEmail1">
-								New tweet
-							</label> -->
-							<!-- <input type="email" class="form-control" id="exampleInputEmail1" pb-role="username"> -->
-							<%= f.label :content, "New Tweet" %>
+							<%= f.label :content, "Compose a new tweet" %>
 							<%= f.text_field :content, :class => "form-control"%>
 							 <input id="media" type="hidden" name="media" value=""/>
-
 						</div>
-
-						<p>Your Snapshot:</p>
-    			<div id="my_result"></div>
-
-</div><br>
-						<!-- <button type="submit" class="btn btn-default" pb-role="submit"> -->
-							<!-- Submit -->
+							<p>Your Snapshot appears here:</p>
+    				<div id="my_result"></div>
+					</div><br>
 							<%= f.submit  :class => "btn btn-default" %>
 							<% end %>
-						<!-- </button> -->
-					<!-- </form> -->
 				</div>
 
-				<div class="col-md-8">
-			<!-- <h3>Twitter feed</h3> -->
-
-    			<!-- <div id="my_result"></div> -->
-					<!-- <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-rounded"> -->
+				<div class="col-md-8 form">
+				<h3>Twitterfeed</h3>
+				<%= @tweet.client.user_timeline(current_user.username).each do |t| %>
+					<%= t.text %>
+					<% end %>
 				</div>
 			</div>
 		</div>
@@ -73,40 +64,16 @@
 </div>
 
 
-
-<!-- <video id="player" autoplay="true"></video> -->
-<!-- <script src="https://s3-us-west-2.amazonaws.com/webcam.js/webcam.js"></script>
-<script src="/assets/javascripts/webcam.js"></script> -->
-    <!-- <div id="my_camera" style="width:320px; height:240px;"></div> -->
-    <!-- <div id="my_result"></div> -->
-<!-- <div id="results"></div>
-<div id="web_cam" ></div> -->
-
-<!-- <form>
-  <input type=button value="Take Photo" onClick="take_image()">
-</form> -->
-
-<%#= form_for @tweet do |f| %>
-
-	<%#= f.label :content %>
-	<%#= f.text_field :content %>
-
-	<%#= f.label :media %>
-	<%#= f.hidden_field :media  %>
-
-	<%#= f.submit %>
-
-<%# end %>
-
 <script type="text/javascript">
   Webcam.attach( '#my_camera' );
 
 	function take_snapshot() {
       Webcam.snap( function(data_uri) {
-				console.log(data_uri.replace(/^data\:image\/\w+\;base64\,/, ''))
-          document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';
+				// console.log(data_uri.replace(/^data\:image\/\w+\;base64\,/, ''))
+				// alert(data_uri)
+        document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';
 				var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
-
+				var complete_image_data = data_uri
         document.getElementById('media').value = raw_image_data;
       } );
   }

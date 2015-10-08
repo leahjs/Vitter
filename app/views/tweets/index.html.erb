@@ -1,55 +1,64 @@
-<div class="container-fluid">
-	<div class="row">
+<!-- <div class="container-fluid">
+	<div class="row"> -->
+<!-- /Menu-->
+  <div id="header-nav">
+    <div class="container">
+  <!-- H1 for SEO -->
+    <div class="brand">
+      <a href="/"><h1>Vitter</h1></a>
+    </div>
+    <!-- Small screen menu button -->
+		<a href="#menu" class="menu-link">
+      <span class="bar1"></span>
+      <span class="bar2"></span>
+      <span class="bar3"></span>
+     </a>
+    <!-- /Small screen menu button -->
+
+    <!-- Menu Items -->
+    <nav id="menu" role="navigation">
+			<ul>
+				<li><a href="/tweets/new">Create a new tweet</a></li> <!-- make an active class to highlight section user is on-->
+				<li><%= link_to 'Profile', tweets_path %></li>
+					<li><%= link_to 'Signout', '/signout' %></li><!-- ad a class to float right make float right-->
+			</ul>
+		</nav>
+    <!-- /Menu Items -->
+      </div>
+	</div>
+<!-- /Menu -->
+
 		<div class="col-md-12">
-
-			<nav class="navbar navbar-default" role="navigation">
-
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button><a class="navbar-brand" href="#">Vitter</a>
-				</div>
-
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="/tweets/new">Create a new tweet</a></li>
-						<li><%= link_to 'All Tweets', tweets_path %></li>
-            <li><%= link_to 'Signout', '/signout' %></li>
-					</ul>
-
-				</div>
-
-			</nav>
-
 			<div class="row">
+
 				<div class="col-md-4">
 					<div class="profile-info">
 						<img class="profile-pic" src="<%= current_user.profile_photo %>" alt="" />
-						<h3><%= current_user.name %></h3>
+						<h3 class="name"><%= current_user.name %></h3>
 							<div class="info">
-								<h4><%= current_user.username %></h4>
-								<h4>Followers:<%= current_user.followers %></h4>
+								<div class="line"></div>
+								<h4 class="username"><%= current_user.username %></h4>
+								<h6 class="username-title">username</h6>
+								<h4 class="followers">Followers: <%= current_user.followers %></h4>
+								<div class="line2"></div>
 							</div>
 						</div><br>
-
 						<div class="">
 							<!-- this section will have the profile info like number of followers and name-->
 						</div>
 				</div>
 
 				<div class="col-md-8">
-
-					<% binding.pry%>
-					<h4>All the tweets/profile</h4>
+					<h4>Tweets:</h4>
 					<% @tweet.each do |tweet| %>
 						<ul>
-							<li style="list-style-type: none;"><p style="text-align: left;"><%= tweet.content %></p></li>
-						<li style="list-style-type: none;">
+							<div class="tweetbox">
+							<li class="tweetbox" style="list-style-type: none;">	<img class="profile-pic" src="<%= current_user.profile_photo %>" alt="" />
+							<p style="text-align: left;"><%= current_user.name%>:<br><%= tweet.content %></p>
+						<%= image_tag tweet.avatar.url %></li>
 
-						<img src="data:image/png;base64,<%= tweet.media %>" />
-						</li>
-							<!-- <li><% tweet.media %></li> -->
+							</div>
+
 						</ul>
 					<% end %>
 				</div>
@@ -57,13 +66,3 @@
 		</div>
 	</div>
 </div>
-
-
-<!-- <%= link_to 'Make a new tweet', new_tweet_path %>
-
-<h1>All uploads</h1>
-<%#= @uploads.each do |upload| %>
-    <div>
-        <%#= link_to upload.name, upload.url %>
-    </div>
-<%# end %> -->
